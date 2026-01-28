@@ -21,6 +21,14 @@
   "keywords": [],
   "author": "Giovan Norick Yang",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giovannorick/pomos-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giovannorick/pomos-cli/issues"
+  },
+  "homepage": "https://github.com/giovannorick/pomos-cli#readme",
   "dependencies": {
     "ink": "^6.6.0",
     "ink-big-text": "^2.0.0",
