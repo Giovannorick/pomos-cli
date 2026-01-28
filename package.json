@@ -1,0 +1,38 @@
+{
+  "name": "@giovannorick/pomos-cli",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.4",
+  "type": "module",
+  "description": "",
+  "bin": {
+    "pomos": "./dist/cli.js"
+  },
+  "main": "dist/cli.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsx src/cli.js",
+    "prepublishOnly": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Giovan Norick Yang",
+  "license": "MIT",
+  "dependencies": {
+    "ink": "^6.6.0",
+    "ink-big-text": "^2.0.0",
+    "ink-gradient": "^3.0.0",
+    "ink-select-input": "^6.2.0",
+    "ink-text-input": "^6.0.0",
+    "meow": "^14.0.0",
+    "node-notifier": "^10.0.1",
+    "react": "^19.2.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2",
+    "tsx": "^4.21.0"
+  }
+}
