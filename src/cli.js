@@ -50,4 +50,10 @@ if (!validCommands.includes(command)) {
   cli.showHelp(1);
 }
 
-render(React.createElement(App, { ...cli.flags, command, durationInput }));
+const { waitUntilExit } = render(
+  React.createElement(App, { ...cli.flags, command, durationInput }),
+);
+
+process.on("exit", () => {
+  console.clear();
+});
