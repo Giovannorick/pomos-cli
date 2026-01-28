@@ -1,6 +1,7 @@
 import notifier from "node-notifier";
 import path from "path";
 import { exec } from "child_process";
+import { fileURLToPath } from "url";
 
 export const formatDuration = (minutes) => {
   const m = Math.floor(minutes);
@@ -15,14 +16,15 @@ export const getOrdinal = (n) => {
 };
 
 export const notifyUser = (title, message) => {
-  // Play custom sound if it exists using PowerShell (Windows native)
-  const soundPath = path.join(
-    process.cwd(),
-    "src",
-    "assets",
-    "notification.wav",
-  );
+  // Resolve asset path relative to the script location
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const assetPath = path.resolve(__dirname, "..", "src", "assets");
 
+  const soundPath = path.join(assetPath, "notification.wav");
+  const iconPath = path.join(assetPath, "icon.png");
+
+  // Play custom sound if it exists using PowerShell (Windows native)
   // Use PowerShell to play the WAV file (Native Windows support, no extra libs needed)
   const psCommand = `powershell -c (New-Object Media.SoundPlayer '${soundPath}').PlaySync()`;
 
@@ -35,6 +37,7 @@ export const notifyUser = (title, message) => {
   notifier.notify({
     title: `🎉 ${title || "Pomos"}`,
     message: message,
+    icon: iconPath,
     sound: false, // Turn off default sound since we are playing custom one
     wait: false,
     appID: "Pomos",

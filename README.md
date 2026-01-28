@@ -9,14 +9,15 @@ A beautiful, interactive Pomodoro timer for your terminal. Designed for focus, b
   - **Quick Timer**: Start focusing immediately with a duration command.
   - **Main Menu**: Choose from classic 25/5 or 50/10 splits, or set a custom session.
 - **Smart Tracking**: Tracks your session progress and reminds you when it's break time.
-- **Desktop Notifications**: Get native alerts when your timer finishes.
+- **Interactive Notifications**: Control your session directly from the notification (Start Break/Focus, Dismiss).
+- **Enhanced Live Clock**: Displays your current time, timezone, and city context (e.g., `12:00 PM GMT+8 | Singapore`).
 - **Global Commands**: Accessible anywhere on your machine once installed.
 
 ## 🛠 Usage
 
 ### Start Interactive Mode
 
-Launch the main menu to select presets or custom sessions.
+Launch the main menu to select presets or custom sessions. The interactive mode provides a continuous flow with prompts between sessions.
 
 ```bash
 pomos start
@@ -24,7 +25,7 @@ pomos start
 
 ### Start Quick Timer
 
-Skip the menu and jump straight into work.
+Skip the menu and jump straight into work. **Note**: The application will automatically exit 3 seconds after the timer finishes.
 
 ```bash
 # General usage

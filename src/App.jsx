@@ -33,6 +33,7 @@ export default function App({ command, durationInput }) {
   // Stats: Tracks COMPLETED WORK cycles for each mode.
   // Resets to 0 only when the loop finishes (after 4 cycles).
   const [stats, setStats] = useState({ a: 0, b: 0, c: 0, q: 0 });
+  const [exitCountdown, setExitCountdown] = useState(3);
 
   // Define configs based on selection
   const options = useMemo(() => {
@@ -126,6 +127,23 @@ export default function App({ command, durationInput }) {
     }
   }, [state.status, state.completedPhase, selectedMode]);
 
+  // Auto-exit for Quick Mode with Countdown
+  useEffect(() => {
+    if (state.status === "COMPLETED" && selectedMode === "q") {
+      const timer = setInterval(() => {
+        setExitCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            process.exit(0);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [state.status, selectedMode]);
+
   // 1. Show Menu
   if (state.status === "IDLE") {
     // Custom mode: Check if resuming a previous session
@@ -185,9 +203,9 @@ export default function App({ command, durationInput }) {
       return (
         <Box flexDirection="column">
           <Text color="green" bold>
-            Timer Finished
+            Timer Finished!
           </Text>
-          <Text dimColor>Press Ctrl+C to exit</Text>
+          <Text dimColor>Exiting in {exitCountdown} seconds...</Text>
         </Box>
       );
     }

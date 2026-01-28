@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.4",
+  "version": "1.1.0",
   "type": "module",
   "description": "",
   "bin": {
@@ -11,7 +11,8 @@
   },
   "main": "dist/cli.js",
   "files": [
-    "dist"
+    "dist",
+    "src/assets"
   ],
   "scripts": {
     "start": "tsx src/cli.js",

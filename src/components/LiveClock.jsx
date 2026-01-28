@@ -12,30 +12,24 @@ export function LiveClock() {
   }, []);
 
   const timeString = time.toLocaleTimeString("en-US", {
-    hour12: false,
+    hour12: true,
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     timeZoneName: "short",
   });
 
-  // timeString is like "21:58:10 GMT+8" or "21:58:10 PST"
-  // User wants "HH:MM:SS (TIMEZONE)"
-  // Let's parse it slightly to add parens if needed, or just display as is?
-  // "21:58:10 GMT+8" is pretty standard.
-  // User asked for "HH:MM:SS (TIMEZONE)".
-  // Let's try to format it to match the request exactly: "21:58:10 (GMT+8)"
-
-  const parts = timeString.split(" ");
-  // parts could be ["21:58:10", "GMT+8"] or ["21:58:10", "PM", "PST"] depending on locale/options
-  // forcing hour12 false usually gives ["21:58:10", "GMT+8"]
-
-  // Let's stick to a robust simple formatting:
-  const finalString = timeString.replace(/ ([A-Z0-9+\-]+)$/, " ($1)");
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // Extract city from "Region/City" or use full string if no slash
+  const city = timeZone.includes("/")
+    ? timeZone.split("/")[1].replace(/_/g, " ")
+    : timeZone;
 
   return (
     <Box marginBottom={1}>
-      <Text dimColor>{finalString}</Text>
+      <Text dimColor>
+        {timeString} | {city}
+      </Text>
     </Box>
   );
 }
